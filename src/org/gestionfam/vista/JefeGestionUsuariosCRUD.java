@@ -26,7 +26,7 @@ public class JefeGestionUsuariosCRUD extends VistaBase {
 		String buttonText = "";
 		switch (type) {
 		case ADD_CLIENT:
-			buttonText = "Añadir Cliente";
+			buttonText = "AÃ±adir Cliente";
 			root = new DefaultMutableTreeNode("Tipos de clientes");
 			root.add(new DefaultMutableTreeNode("Particular"));
 			root.add(new DefaultMutableTreeNode("Empresa"));

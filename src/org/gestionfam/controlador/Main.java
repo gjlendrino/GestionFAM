@@ -26,7 +26,7 @@ public class Main {
 		EventQueue.invokeAndWait(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					VistaBase frame = new Login();
 //					JefeGestionUsuarios frame = new JefeGestionUsuarios();
 //					Test frame = new Test();
 					frame.setVisible(true);
