@@ -26,4 +26,4 @@ hs_err_pid*
 .classpath
 .project
 
-db_file.*
+hsqldb_file.*

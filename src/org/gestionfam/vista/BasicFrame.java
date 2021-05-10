@@ -13,20 +13,25 @@ import javax.swing.border.EmptyBorder;
 
 import org.gestionfam.controlador.Main;
 
-public class VistaBase extends JFrame {
+public class BasicFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4443385630336080959L;
+
 	public enum Size {
 		NORMAL,
 		SMALL
 	}
 
-	protected JPanel contentPane;
+	protected JPanel contentPanel;
 	protected GridBagLayout gbl_contentPane;
 
 	/**
 	 * Create the frame.
 	 */
-	public VistaBase(VistaBase.Size size) {
+	public BasicFrame(BasicFrame.Size size) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		if (size == Size.SMALL) {
 			setBounds(100, 100, 400, 300);
@@ -34,21 +39,21 @@ public class VistaBase extends JFrame {
 		else {
 			setBounds(100, 100, 800, 600);
 		}
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel = new JPanel();
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
-		setContentPane(contentPane);
+		contentPanel.setLayout(gbl_contentPane);
+		setContentPane(contentPanel);
 	}
 
-	public VistaBase() {
-		this(VistaBase.Size.NORMAL);
+	public BasicFrame() {
+		this(BasicFrame.Size.NORMAL);
 	}
 	
-	protected void rejilla(int columnas, int filas) {
-		switch (columnas) {
+	protected void setGrid(int cols, int rows) {
+		switch (cols) {
 		case 1:
 			gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 			break;
@@ -62,7 +67,7 @@ public class VistaBase extends JFrame {
 			gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			break;
 		}
-		switch (filas) {
+		switch (rows) {
 		case 1:
 			gbl_contentPane.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 			break;
@@ -78,7 +83,7 @@ public class VistaBase extends JFrame {
 		}
 	}
 	
-	protected GridBagConstraints posicion(int gridx, int gridy, int fill) {
+	protected GridBagConstraints setPosition(int gridx, int gridy, int fill) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = fill;
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -87,8 +92,8 @@ public class VistaBase extends JFrame {
 		return gbc;
 	}
 	
-	protected GridBagConstraints posicion(int gridx, int gridy) {
-		return posicion(gridx, gridy, GridBagConstraints.HORIZONTAL);
+	protected GridBagConstraints setPosition(int gridx, int gridy) {
+		return setPosition(gridx, gridy, GridBagConstraints.HORIZONTAL);
 	}
 	
 	protected JButton addExitButton() {
@@ -102,7 +107,7 @@ public class VistaBase extends JFrame {
 		return buttonExit;
 	}
 	
-	protected JButton addCancelButton(VistaBase frame) {
+	protected JButton addCancelButton(BasicFrame frame) {
 		JButton buttonCancel = new JButton("Volver");
 	    buttonCancel.addActionListener(new ActionListener(){
 			@Override

@@ -13,24 +13,31 @@ public class HSQLDB {
 
 	public HSQLDB(String db_file_name_prefix) throws ClassNotFoundException, SQLException {
 		Class.forName("org.hsqldb.jdbcDriver");
-		conn = DriverManager.getConnection("jdbc:hsqldb:"
-                + db_file_name_prefix,    // filenames
+		conn = DriverManager.getConnection("jdbc:hsqldb:" + db_file_name_prefix,    // filenames
                 "sa",                     // username
                 "");                      // password
         st = conn.createStatement();    // statements
     }
 	
-	public void parar() throws SQLException {
+	public void shutdown() throws SQLException {
         st.execute("SHUTDOWN");
         st.close();
         conn.close();
 	}
 	
-	public synchronized void crud(String expression) throws SQLException {
-        int i = st.executeUpdate(expression);    // run the query
-        if (i == -1) {
-            System.out.println("db error : " + expression);
-        }
+	public synchronized boolean crud(String expression) {
+		boolean ret = true;
+		try {
+			int i = st.executeUpdate(expression);    // run the query
+	        if (i == -1) {
+	            System.out.println("db error : " + expression);
+	            ret = false;
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+            ret = false;
+		}
+        return ret;
     }
 	
 	public synchronized ResultSet query(String expression) throws SQLException {

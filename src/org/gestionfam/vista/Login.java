@@ -1,36 +1,35 @@
 package org.gestionfam.vista;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
-import org.gestionfam.controlador.Main;
 import org.gestionfam.modelo.Persona;
-import org.gestionfam.modelo.db.ClienteBD;
+import org.gestionfam.modelo.db.DBClient;
 
-public class Login extends VistaBase {
+public class Login extends BasicFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1185834276523038033L;
 
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
 	public Login() throws SQLException {
-		super(VistaBase.Size.SMALL);
+		super(BasicFrame.Size.SMALL);
 		
-		rejilla(2, 3);
+		setGrid(2, 3);
 		
 		JLabel lbl1 = new JLabel("Tipo de usuario:");
-	    contentPane.add(lbl1, posicion(0, 0));
+	    contentPanel.add(lbl1, setPosition(0, 0));
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.addItem("");
@@ -38,23 +37,23 @@ public class Login extends VistaBase {
 		comboBox.addItem("Cliente");
 		comboBox.addItem("Artesano");
 		comboBox.addItem("Comercial");
-	    contentPane.add(comboBox, posicion(1, 0));
+	    contentPanel.add(comboBox, setPosition(1, 0));
 		
 		JLabel lbl2 = new JLabel("Nombre:");
-	    contentPane.add(lbl2, posicion(0, 1));
+	    contentPanel.add(lbl2, setPosition(0, 1));
 		
 		JTextField textName = new JTextField();
 		textName.setColumns(10);
-	    contentPane.add(textName, posicion(1, 1));
+	    contentPanel.add(textName, setPosition(1, 1));
 		
 		JButton buttonOK = new JButton("Entrar");
 		buttonOK.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					boolean exists = ClienteBD.getClienteBD().existeUsuario(comboBox.getSelectedItem().toString(), textName.getText());
+					boolean exists = DBClient.getClient().userExists(comboBox.getSelectedItem().toString(), textName.getText());
 					if (exists && comboBox.getSelectedItem().toString().equalsIgnoreCase(Persona.Tipo.Jefe.toString())) {
-						VistaBase frame = new JefeGestionUsuarios();
+						BasicFrame frame = new JefeGestionUsuarios();
 						frame.setVisible(true);
 						setVisible(false);
 					}
@@ -69,10 +68,10 @@ public class Login extends VistaBase {
 				}
 			}
 		});
-	    contentPane.add(buttonOK, posicion(0, 2));
+	    contentPanel.add(buttonOK, setPosition(0, 2));
 		
 		JButton buttonExit = addExitButton();
-	    contentPane.add(buttonExit, posicion(1, 2));
+	    contentPanel.add(buttonExit, setPosition(1, 2));
 	}
 
 }

@@ -5,28 +5,28 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class JefeGestionUsuarios extends VistaBase {
+public class JefeGestionUsuarios extends BasicFrame {
 
 	/**
 	 * Create the frame.
 	 */
 	public JefeGestionUsuarios() {
-		super(VistaBase.Size.SMALL);
+		super(BasicFrame.Size.SMALL);
 		
-		rejilla(1, 2);
+		setGrid(1, 2);
 	 
 	    JButton buttonAddClient = new JButton("Alta de Cliente");
 	    buttonAddClient.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VistaBase frame = new JefeGestionUsuariosCRUD(JefeGestionUsuariosCRUD.Type.ADD_CLIENT);
+				BasicFrame frame = new JefeGestionUsuariosCRUD(JefeGestionUsuariosCRUD.Type.ADD_CLIENT);
 				frame.setVisible(true);
 			}
 		});
-	    contentPane.add(buttonAddClient, posicion(0, 0));
+	    contentPanel.add(buttonAddClient, setPosition(0, 0));
 
 		JButton buttonExit = addExitButton();
-	    contentPane.add(buttonExit, posicion(0, 1));
+	    contentPanel.add(buttonExit, setPosition(0, 1));
 	}
 
 }
