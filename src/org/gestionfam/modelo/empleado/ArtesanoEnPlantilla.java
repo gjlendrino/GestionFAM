@@ -1,4 +1,4 @@
-package org.gestionfam.modelo;
+package org.gestionfam.modelo.empleado;
 
 public class ArtesanoEnPlantilla extends Artesano {
 

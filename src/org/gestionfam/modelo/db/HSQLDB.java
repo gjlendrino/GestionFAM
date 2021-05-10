@@ -40,8 +40,15 @@ public class HSQLDB {
         return ret;
     }
 	
-	public synchronized ResultSet query(String expression) throws SQLException {
-        return st.executeQuery(expression);
+	public synchronized ResultSet query(String expression) {
+		ResultSet result = null;
+		try {
+			result = st.executeQuery(expression);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return result;
 	}
 
 }

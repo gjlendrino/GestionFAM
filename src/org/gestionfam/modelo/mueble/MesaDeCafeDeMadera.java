@@ -1,4 +1,4 @@
-package org.gestionfam.modelo;
+package org.gestionfam.modelo.mueble;
 
 public class MesaDeCafeDeMadera extends MesaDeCafe {
 	

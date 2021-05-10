@@ -33,10 +33,12 @@ public class Login extends BasicFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.addItem("");
-		comboBox.addItem("Jefe");
-		comboBox.addItem("Cliente");
-		comboBox.addItem("Artesano");
-		comboBox.addItem("Comercial");
+		comboBox.addItem(Persona.Type.Jefe.toString());
+		comboBox.addItem(Persona.Type.Comercial.toString());
+		comboBox.addItem(Persona.Type.ArtesanoEnPlantilla.toString());
+		comboBox.addItem(Persona.Type.ArtesanoConContratoPorHoras.toString());
+		comboBox.addItem(Persona.Type.Empresa.toString());
+		comboBox.addItem(Persona.Type.Particular.toString());
 	    contentPanel.add(comboBox, setPosition(1, 0));
 		
 		JLabel lbl2 = new JLabel("Nombre:");
@@ -52,8 +54,14 @@ public class Login extends BasicFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					boolean exists = DBClient.getClient().userExists(comboBox.getSelectedItem().toString(), textName.getText());
-					if (exists && comboBox.getSelectedItem().toString().equalsIgnoreCase(Persona.Tipo.Jefe.toString())) {
+					exists = true;
+					if (exists && comboBox.getSelectedItem().toString().equalsIgnoreCase(Persona.Type.Jefe.toString())) {
 						BasicFrame frame = new JefeGestionUsuarios();
+						frame.setVisible(true);
+						setVisible(false);
+					}
+					else if (exists && comboBox.getSelectedItem().toString().equalsIgnoreCase(Persona.Type.Particular.toString())) {
+						BasicFrame frame = new ClienteGestionPedidos();
 						frame.setVisible(true);
 						setVisible(false);
 					}

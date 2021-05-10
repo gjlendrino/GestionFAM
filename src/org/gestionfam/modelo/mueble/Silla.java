@@ -1,4 +1,6 @@
-package org.gestionfam.modelo;
+package org.gestionfam.modelo.mueble;
+
+import org.gestionfam.modelo.Mueble;
 
 public class Silla extends Mueble {
 
